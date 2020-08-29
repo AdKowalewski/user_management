@@ -1,9 +1,16 @@
 package com.sda.jpa.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Worker {
 
     @Id
@@ -21,6 +28,6 @@ public class Worker {
     @Temporal(TemporalType.DATE)
     private LocalDate hireDate;
 
-    @OneToMany()
+    @OneToMany(cascade = CascadeType.ALL)
     private long departmentId;
 }
