@@ -11,6 +11,6 @@ public interface GenericDao <T> {
     List<T> getAll();
 
     void update (T entity);
-    
+
     void save (T entity);
 }
