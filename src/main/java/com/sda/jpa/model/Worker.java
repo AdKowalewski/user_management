@@ -29,5 +29,6 @@ public class Worker {
     private LocalDate hireDate;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id")
     private long departmentId;
 }
