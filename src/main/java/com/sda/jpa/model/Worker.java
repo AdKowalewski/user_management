@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -23,10 +24,12 @@ public class Worker {
     @Column(length = 50, nullable = false)
     private String lastName;
 
+    @Column(nullable = false)
     private int age;
 
     @Temporal(TemporalType.DATE)
-    private Date hireDate;
+    @Column(nullable = false)
+    private LocalDateTime hireDate;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
