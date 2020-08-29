@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -26,9 +26,21 @@ public class Worker {
     private int age;
 
     @Temporal(TemporalType.DATE)
-    private LocalDate hireDate;
+    private Date hireDate;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "department_id")
-    private long departmentId;
+    private Department departmentId;
+
+    @Override
+    public String toString() {
+        return "Worker{" +
+                "workerId=" + workerId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", hireDate=" + hireDate +
+                ", departmentId=" + departmentId +
+                '}';
+    }
 }

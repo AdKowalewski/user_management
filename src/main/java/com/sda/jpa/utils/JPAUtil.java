@@ -16,7 +16,7 @@ public class JPAUtil {
         return entityManager;
     }
 
-    public static void doInTransaction (Consumer<EntityManager> action) {
-
-    }
+//    public static void doInTransaction (Consumer<EntityManager> action) {
+//
+//    }
 }

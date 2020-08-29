@@ -18,4 +18,12 @@ public class Department {
 
     @Column(length = 100, nullable = false)
     private String name;
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "departmentId=" + departmentId +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
