@@ -1,5 +1,6 @@
 package com.sda.jpa.dao;
 
+import com.sda.jpa.model.Department;
 import com.sda.jpa.model.Worker;
 import com.sda.jpa.utils.JPAUtil;
 
@@ -35,8 +36,10 @@ public class WorkerDao implements GenericDao<Worker> {
 
     @Override
     public void delete(long id) {
-        Worker wor = get(id);
-        JpaHelper.getEntityManager().remove(wor);
+        JpaHelper.doInTransaction((entityManager -> {
+            Worker wor = JpaHelper.getEntityManager().find(Worker.class, id);
+            JpaHelper.getEntityManager().remove(wor);
+        }));
     }
 
     @Override

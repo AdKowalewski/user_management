@@ -13,5 +13,6 @@ public class Application {
 
         System.out.println("Get by id: " + departmentDao1.get(sawedDepartment1.getDepartmentId()));
         System.out.println("Get all: " + departmentDao1.getAll());
+        System.out.println("Find by name: " + departmentDao1.findByName("department na"));
     }
 }

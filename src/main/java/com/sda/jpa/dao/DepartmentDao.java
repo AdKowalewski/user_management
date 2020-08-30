@@ -37,8 +37,10 @@ public class DepartmentDao implements GenericDao<Department> {
 
     @Override
     public void delete(long id) {
-        Department dep = get(id);
-        JpaHelper.getEntityManager().remove(dep);
+        JpaHelper.doInTransaction((entityManager -> {
+            Department dep = JpaHelper.getEntityManager().find(Department.class, id);
+            JpaHelper.getEntityManager().remove(dep);
+        }));
     }
 
     @Override
