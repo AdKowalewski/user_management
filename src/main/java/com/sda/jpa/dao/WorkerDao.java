@@ -37,8 +37,7 @@ public class WorkerDao implements GenericDao<Worker> {
     @Override
     public void delete(long id) {
         JpaHelper.doInTransaction((entityManager -> {
-            Worker wor = JpaHelper.getEntityManager().find(Worker.class, id);
-            JpaHelper.getEntityManager().remove(wor);
+            entityManager.remove(this.get(id));
         }));
     }
 
