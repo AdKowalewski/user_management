@@ -3,7 +3,9 @@ package com.sda.jpa.dao;
 import com.sda.jpa.model.Department;
 import com.sda.jpa.utils.JPAUtil;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DepartmentDao implements GenericDao<Department> {
@@ -11,12 +13,17 @@ public class DepartmentDao implements GenericDao<Department> {
 
     @Override
     public Department get(long id) {
-        return JpaHelper.getEntityManager().find(Department.class, id);
+        // SELECT * FROM department WHERE departmentId = {id}
+        // return JpaHelper.getEntityManager().find(Department.class, id);
+        Query query = JpaHelper.getEntityManager().createQuery("SELECT d FROM department d WHERE d.departmentId = :id");
+        query.setParameter("id", id);
+        return (Department) query.getSingleResult();
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Department> getAll() {
-        Query query = JpaHelper.getEntityManager().createQuery("SELECT d FROM department d", Department.class);
+        Query query = JpaHelper.getEntityManager().createQuery("SELECT d FROM department d");
         return query.getResultList();
     }
 
@@ -36,6 +43,14 @@ public class DepartmentDao implements GenericDao<Department> {
 
     @Override
     public void update(Department entity) {
-        Query query = JpaHelper.getEntityManager().createQuery("updateDepartment", Department.class);
+        JpaHelper.doInTransaction((entityManager -> {
+            entityManager.merge(entity);
+        }));
     }
-}
+
+    public List<Department> findByName(String name) {
+        Query query = JpaHelper.getEntityManager().createQuery("SELECT d FROM department d WHERE d.name like :name");
+        query.setParameter("name", "%" + name + "%");
+        return query.getResultList();
+    }
+ }

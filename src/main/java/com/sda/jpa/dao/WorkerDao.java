@@ -1,9 +1,7 @@
 package com.sda.jpa.dao;
 
-import com.sda.jpa.model.Department;
 import com.sda.jpa.model.Worker;
 import com.sda.jpa.utils.JPAUtil;
-import org.hibernate.cfg.JPAIndexHolder;
 
 import javax.persistence.Query;
 import java.util.List;
@@ -13,12 +11,17 @@ public class WorkerDao implements GenericDao<Worker> {
 
     @Override
     public Worker get(long id) {
-        return JpaHelper.getEntityManager().find(Worker.class, id);
+        // SELECT * FROM worker WHERE workerId = {id}
+        // return JpaHelper.getEntityManager().find(Worker.class, id);
+        Query query = JpaHelper.getEntityManager().createQuery("SELECT w FROM worker w WHERE w.workerId = :id");
+        query.setParameter("id", id);
+        return (Worker) query.getSingleResult();
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Worker> getAll() {
-        Query query = JpaHelper.getEntityManager().createQuery("SELECT w FROM worker w", Worker.class);
+        Query query = JpaHelper.getEntityManager().createQuery("SELECT w FROM worker w");
         return query.getResultList();
     }
 
@@ -38,6 +41,8 @@ public class WorkerDao implements GenericDao<Worker> {
 
     @Override
     public void update(Worker entity) {
-        Query query = JpaHelper.getEntityManager().createQuery("updateWorker", Worker.class);
+        JpaHelper.doInTransaction((entityManager -> {
+            entityManager.merge(entity);
+        }));
     }
 }
