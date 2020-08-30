@@ -15,7 +15,7 @@ public class DepartmentDao implements GenericDao<Department> {
         try {
             // SELECT * FROM department WHERE departmentId = {id}
             // return JpaHelper.getEntityManager().find(Department.class, id);
-            Query query = JpaHelper.getEntityManager().createQuery("SELECT d FROM department d WHERE d.departmentId = :id");
+            Query query = JpaHelper.getEntityManager().createQuery("FROM department d WHERE d.departmentId = :id");
             query.setParameter("id", id);
             return (Department) query.getSingleResult();
         } catch (NoResultException ex) {
@@ -26,7 +26,7 @@ public class DepartmentDao implements GenericDao<Department> {
     @Override
     @SuppressWarnings("unchecked")
     public List<Department> getAll() {
-        Query query = JpaHelper.getEntityManager().createQuery("SELECT d FROM department d");
+        Query query = JpaHelper.getEntityManager().createQuery("FROM department d");
         return query.getResultList();
     }
 
@@ -53,7 +53,7 @@ public class DepartmentDao implements GenericDao<Department> {
     }
 
     public List<Department> findByName(String name) {
-        Query query = JpaHelper.getEntityManager().createQuery("SELECT d FROM department d WHERE d.name like :name");
+        Query query = JpaHelper.getEntityManager().createQuery("FROM department d WHERE d.name like :name");
         query.setParameter("name", "%" + name + "%");
         return query.getResultList();
     }

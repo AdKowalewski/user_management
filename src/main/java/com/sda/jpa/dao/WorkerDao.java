@@ -1,6 +1,5 @@
 package com.sda.jpa.dao;
-
-import com.sda.jpa.model.Department;
+;
 import com.sda.jpa.model.Worker;
 import com.sda.jpa.utils.JPAUtil;
 
@@ -14,7 +13,7 @@ public class WorkerDao implements GenericDao<Worker> {
     public Worker get(long id) {
         // SELECT * FROM worker WHERE workerId = {id}
         // return JpaHelper.getEntityManager().find(Worker.class, id);
-        Query query = JpaHelper.getEntityManager().createQuery("SELECT w FROM worker w WHERE w.workerId = :id");
+        Query query = JpaHelper.getEntityManager().createQuery("FROM worker w WHERE w.workerId = :id");
         query.setParameter("id", id);
         return (Worker) query.getSingleResult();
     }
@@ -22,7 +21,7 @@ public class WorkerDao implements GenericDao<Worker> {
     @Override
     @SuppressWarnings("unchecked")
     public List<Worker> getAll() {
-        Query query = JpaHelper.getEntityManager().createQuery("SELECT w FROM worker w");
+        Query query = JpaHelper.getEntityManager().createQuery("FROM worker w");
         return query.getResultList();
     }
 

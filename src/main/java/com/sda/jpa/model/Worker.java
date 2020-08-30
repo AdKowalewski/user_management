@@ -8,30 +8,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-//@NamedQueries({
-//        @NamedQuery(
-//                name = "saveWorker",
-//                query = "INSERT INTO worker w (w.firstName, w.lastName, w.age, w.hireDate, w.departmentId)" +
-//                        "VALUES (w.firstName = :fName," +
-//                        "w.lastName = :lName," +
-//                        "w.age = :age," +
-//                        "w.hireDate = :hDate," +
-//                        "w.departmentId = :depId)"),
-//        @NamedQuery(
-//                name = "deleteWorker",
-//                query = "DELETE FROM worker w WHERE w.workerId = :id"),
-//        @NamedQuery(
-//                name = "updateWorker",
-//                query = "UPDATE worker w " +
-//                        "SET w.firstName = :fName, " +
-//                        "w.lastName = :lName, " +
-//                        "w.age = :age, " +
-//                        "w.hireDate = :hDate," +
-//                        "w.departmentId = :depId " +
-//                        "WHERE w.workerId = :id"),
-//})
-
-@Entity
+@Entity(name = "worker")
 @Getter
 @Setter
 @NoArgsConstructor
