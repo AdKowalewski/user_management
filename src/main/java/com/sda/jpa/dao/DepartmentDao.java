@@ -3,9 +3,8 @@ package com.sda.jpa.dao;
 import com.sda.jpa.model.Department;
 import com.sda.jpa.utils.JPAUtil;
 
-import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import java.util.LinkedList;
 import java.util.List;
 
 public class DepartmentDao implements GenericDao<Department> {
@@ -13,11 +12,15 @@ public class DepartmentDao implements GenericDao<Department> {
 
     @Override
     public Department get(long id) {
-        // SELECT * FROM department WHERE departmentId = {id}
-        // return JpaHelper.getEntityManager().find(Department.class, id);
-        Query query = JpaHelper.getEntityManager().createQuery("SELECT d FROM department d WHERE d.departmentId = :id");
-        query.setParameter("id", id);
-        return (Department) query.getSingleResult();
+        try {
+            // SELECT * FROM department WHERE departmentId = {id}
+            // return JpaHelper.getEntityManager().find(Department.class, id);
+            Query query = JpaHelper.getEntityManager().createQuery("SELECT d FROM department d WHERE d.departmentId = :id");
+            query.setParameter("id", id);
+            return (Department) query.getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 
     @Override

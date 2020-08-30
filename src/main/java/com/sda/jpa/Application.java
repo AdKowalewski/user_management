@@ -7,12 +7,17 @@ public class Application {
 
     public static void main(String[] args) {
 
-        DepartmentDao departmentDao1 = new DepartmentDao();
-        Department sawedDepartment1 = departmentDao1.save(new Department("Department name 1"));
-        System.out.println("Sawed department: " + sawedDepartment1);
+        DepartmentDao departmentDao = new DepartmentDao();
+        Department sawedDepartment = departmentDao.save(new Department("Department name 1"));
+        System.out.println("Sawed department: " + sawedDepartment);
 
-        System.out.println("Get by id: " + departmentDao1.get(sawedDepartment1.getDepartmentId()));
-        System.out.println("Get all: " + departmentDao1.getAll());
-        System.out.println("Find by name: " + departmentDao1.findByName("department na"));
+        System.out.println("Get by id: " + departmentDao.get(sawedDepartment.getDepartmentId()));
+        System.out.println("Get all: " + departmentDao.getAll());
+        System.out.println("Find by name: " + departmentDao.findByName("department na"));
+
+        long id = 1;
+        System.out.println("Removing entity with departmentId = " + id);
+        departmentDao.delete(id);
+        System.out.println("Find element by id = " + id + " : " + departmentDao.get(id));
     }
 }
