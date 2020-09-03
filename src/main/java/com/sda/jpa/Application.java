@@ -2,6 +2,8 @@ package com.sda.jpa;
 
 import com.sda.jpa.dao.DepartmentDao;
 import com.sda.jpa.model.Department;
+import com.sda.jpa.model.Worker;
+import com.sda.jpa.model.WorkerBuilder;
 
 public class Application {
 
@@ -23,5 +25,11 @@ public class Application {
         Department department = new Department("New name");
         department.setDepartmentId(3);
         departmentDao.update(department);
+
+        Worker worker = new WorkerBuilder()
+                .setFirstName("Adam")
+                .setLastName("Kowalewski")
+                .setAge(23)
+                .createWorker();
     }
 }

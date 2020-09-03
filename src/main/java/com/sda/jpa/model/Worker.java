@@ -31,13 +31,13 @@ public class Worker {
 
     @ManyToOne
     @JoinColumn(name = "department_id")
-    private Department departmentId;
+    private Department department;
 
-    public Worker(String firstName, String lastName, int age, LocalDateTime hireDate, Department departmentId) {
+    public Worker(String firstName, String lastName, int age, LocalDateTime hireDate, Department department) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.hireDate = hireDate;
-        this.departmentId = departmentId;
+        this.department = department;
     }
 }

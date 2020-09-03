@@ -1,5 +1,6 @@
 package com.sda.jpa.dao;
-;
+
+import com.sda.jpa.model.Department;
 import com.sda.jpa.model.Worker;
 import com.sda.jpa.utils.JPAUtil;
 
@@ -27,16 +28,19 @@ public class WorkerDao implements GenericDao<Worker> {
 
     @Override
     public Worker save(Worker entity) {
-        JpaHelper.doInTransaction((entityManager) -> {
+        JpaHelper.doInTransaction((entityManager -> {
+            Department department = entityManager.find(Department.class, entity.getDepartment().getDepartmentId());
+            entity.setDepartment(department);
             entityManager.persist(entity);
-        });
+        }));
         return entity;
     }
 
     @Override
     public void delete(long id) {
         JpaHelper.doInTransaction((entityManager -> {
-            entityManager.remove(this.get(id));
+            Worker entity = this.get(id);
+            entityManager.remove(entity);
         }));
     }
 
@@ -45,5 +49,11 @@ public class WorkerDao implements GenericDao<Worker> {
         JpaHelper.doInTransaction((entityManager -> {
             entityManager.merge(entity);
         }));
+    }
+
+    public List<Department> findByLastName(String lastName) {
+        Query query = JpaHelper.getEntityManager().createQuery("Select w.lastName FROM worker w WHERE d.lastName like :lastName");
+        query.setParameter("lastName", "%" + lastName + "%");
+        return query.getResultList();
     }
 }

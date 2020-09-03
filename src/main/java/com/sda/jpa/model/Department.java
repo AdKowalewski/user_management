@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "department")
 @Getter
@@ -20,6 +21,9 @@ public class Department {
 
     @Column(length = 100, nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Worker> workers;
 
     public Department(String name) {
         this.name = name;
