@@ -29,8 +29,8 @@ public class WorkerBuilder {
         return this;
     }
 
-    public WorkerBuilder setDepartmentId(Department departmentId) {
-        this.departmentId = departmentId;
+    public WorkerBuilder setDepartment(Department department) {
+        this.departmentId = department;
         return this;
     }
 

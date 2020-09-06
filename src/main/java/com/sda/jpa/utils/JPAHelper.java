@@ -6,7 +6,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.function.Consumer;
 
-public class JPAUtil {
+public class JPAHelper {
     private static EntityManager entityManager;
     private final static Object lock = new Object();
 

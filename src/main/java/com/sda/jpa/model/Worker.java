@@ -33,7 +33,12 @@ public class Worker {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    public Worker(String firstName, String lastName, int age, LocalDateTime hireDate, Department department) {
+    public void setDepartment(Department department) {
+        this.department = department;
+        department.getWorkers().add(this);
+    }
+
+    Worker(String firstName, String lastName, int age, LocalDateTime hireDate, Department department) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

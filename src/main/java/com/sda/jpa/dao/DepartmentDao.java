@@ -1,14 +1,15 @@
 package com.sda.jpa.dao;
 
 import com.sda.jpa.model.Department;
-import com.sda.jpa.utils.JPAUtil;
+import com.sda.jpa.model.Worker;
+import com.sda.jpa.utils.JPAHelper;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 
 public class DepartmentDao implements GenericDao<Department> {
-    JPAUtil JpaHelper = new JPAUtil();
+    JPAHelper JpaHelper = new JPAHelper();
 
     @Override
     public Department get(long id) {
@@ -54,9 +55,13 @@ public class DepartmentDao implements GenericDao<Department> {
         }));
     }
 
-    public List<Department> findByName(String name) {
-        Query query = JpaHelper.getEntityManager().createQuery("FROM department d WHERE d.name like :name");
-        query.setParameter("name", "%" + name + "%");
-        return query.getResultList();
+//    public List<Department> findByName(String name) {
+//        Query query = JpaHelper.getEntityManager().createQuery("FROM department d WHERE d.name like :name");
+//        query.setParameter("name", "%" + name + "%");
+//        return query.getResultList();
+//    }
+
+    public List<Worker> getWorkersFromDepartment(Department entity) {
+        return entity.getWorkers();
     }
  }

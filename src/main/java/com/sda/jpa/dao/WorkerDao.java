@@ -2,13 +2,13 @@ package com.sda.jpa.dao;
 
 import com.sda.jpa.model.Department;
 import com.sda.jpa.model.Worker;
-import com.sda.jpa.utils.JPAUtil;
+import com.sda.jpa.utils.JPAHelper;
 
 import javax.persistence.Query;
 import java.util.List;
 
 public class WorkerDao implements GenericDao<Worker> {
-    JPAUtil JpaHelper = new JPAUtil();
+    JPAHelper JpaHelper = new JPAHelper();
 
     @Override
     public Worker get(long id) {
@@ -51,9 +51,15 @@ public class WorkerDao implements GenericDao<Worker> {
         }));
     }
 
-    public List<Department> findByLastName(String lastName) {
-        Query query = JpaHelper.getEntityManager().createQuery("Select w.lastName FROM worker w WHERE d.lastName like :lastName");
-        query.setParameter("lastName", "%" + lastName + "%");
-        return query.getResultList();
-    }
+//    public List<Department> findByLastName(String lastName) {
+//        Query query = JpaHelper.getEntityManager().createQuery("Select w.lastName FROM worker w WHERE w.lastName like :lastName");
+//        query.setParameter("lastName", "%" + lastName + "%");
+//        return query.getResultList();
+//    }
+
+//    public List<Worker> findByDepartment(long departmentId) {
+//        Query query = JPAHelper.getEntityManager().createQuery("FROM worker w WHERE w.department = :departmentId");
+//        query.setParameter("departmentId", departmentId);
+//        return query.getResultList();
+//    }
 }
