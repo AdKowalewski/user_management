@@ -19,6 +19,6 @@ public class UpdateDepartmentPage implements IPage {
         String departmentName = InputHelper.getScanner().nextLine();
         department.setName(departmentName);
         departmentDao.update(department);
-        System.out.println("New department successfully added!");
+        System.out.println("New department successfully updated!");
     }
 }

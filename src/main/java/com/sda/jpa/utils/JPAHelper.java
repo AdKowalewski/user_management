@@ -16,8 +16,8 @@ public class JPAHelper {
                 if (entityManager == null) {
                     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("mysqlPU");
                     entityManager = entityManagerFactory.createEntityManager();
-                }
-            }
+        }
+    }
         }
         return entityManager;
     }

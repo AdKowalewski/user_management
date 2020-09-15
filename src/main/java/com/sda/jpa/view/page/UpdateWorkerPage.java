@@ -42,6 +42,6 @@ public class UpdateWorkerPage implements IPage {
                 .setDepartment(department)
                 .createWorker();
         workerdao.update(worker);
-        System.out.println("New worker successfully added!");
+        System.out.println("New worker successfully updated!");
     }
 }

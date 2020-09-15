@@ -26,6 +26,7 @@ public class AddWorkerPage implements IPage {
         LocalDateTime hireDate = LocalDateTime.parse(hireDateString);
         System.out.print("Worker department: ");
         long departmentId = InputHelper.getScanner().nextLong();
+        // DepartmentDao departmentDao = new DepartmentDao(); -gdyby nie było fabryki DaoFactory
         DepartmentDao departmentDao = (DepartmentDao) DaoFactory.getInstance(DepartmentDao.class);
         Department department = departmentDao.get(departmentId);
 

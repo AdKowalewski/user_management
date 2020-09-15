@@ -16,11 +16,11 @@ public class DepartmentDao implements GenericDao<Department> {
         try {
             // SELECT * FROM department WHERE departmentId = {id}
             // return JpaHelper.getEntityManager().find(Department.class, id);
-            Query query = JpaHelper.getEntityManager().createQuery("FROM department d WHERE d.departmentId = :id");
-            query.setParameter("id", id);
+            Query query = JpaHelper.getEntityManager().createQuery("FROM department d WHERE d.departmentId = :idParameter");
+            query.setParameter("idParameter", id);
             return (Department) query.getSingleResult();
         } catch (NoResultException ex) {
-            return null;
+            throw new NoResultException();
         }
     }
 
